@@ -2,7 +2,6 @@ package xIMU.communicator;
 
 import java.io.IOException;
 import java.util.UUID;
-
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.AsyncTask;
@@ -48,6 +47,10 @@ public class ConnectToIMU extends AsyncTask<Void, Boolean, BluetoothSocket> {
 
 		try {
 			btSocket.connect();	
+			
+			dataStream runnable = new dataStream(device, btSocket, 1);
+			runnable.start();
+			
 			publishProgress(true);
 		} catch (IOException connectException) {
 			try {
