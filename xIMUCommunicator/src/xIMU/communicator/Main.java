@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -31,7 +33,7 @@ import android.widget.Toast;
  */
 
 public class Main extends Activity {
-
+	
 	Button btScanDevice;
 	Button btDisconnect;
 	TextView stateBluetooth;
@@ -48,7 +50,7 @@ public class Main extends Activity {
 		setContentView(R.layout.main_layout);
 
 		Log.w("Main", "+++ onCreate() +++");
-
+		
 		btScanDevice = (Button) findViewById(R.id.btScan);
 		btScanDevice.setOnClickListener(btnScanDeviceOnClickListener);
 		btScanDevice.setEnabled(false);
@@ -81,9 +83,9 @@ public class Main extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
 		unregisterReceiver(ActionFoundReceiver);
 		Log.w("Main", "+++ onDestroy() +++");
+		super.onDestroy();
 	}
 
 	@Override
